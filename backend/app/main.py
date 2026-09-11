@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
 from pydantic import BaseModel
 from app.services.document_service import extract_text_from_pdf
+from app.services.chunk_service import chunk_text
 
 
 load_dotenv()
@@ -44,4 +45,6 @@ def ask_question(question: Question):
 async def upload_document(file: UploadFile = File(...)):
     text = extract_text_from_pdf(file.file)
 
-    return {"filename": file.filename, "text": text}
+    chunks = chunk_text(text)
+
+    return {"filename": file.filename, "chunk_count": len(chunks), "chunks": chunks}
