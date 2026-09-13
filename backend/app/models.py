@@ -2,6 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from pgvector.sqlalchemy import Vector
 
 class Base(DeclarativeBase):
     pass
@@ -22,3 +23,8 @@ class Chunk(Base):
     )
     chunk_index: Mapped[int] = mapped_column(Integer)
     content: Mapped[str] = mapped_column(Text)
+
+    embedding: Mapped[list[float]] = mapped_column(
+        Vector(1536),
+        nullable=True
+    ) 
