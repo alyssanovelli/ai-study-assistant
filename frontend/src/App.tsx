@@ -43,27 +43,41 @@ function App() {
 
   return (
     // Page
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-[#f5f5f5]">
 
       {/* Header */}
-      <header className="border-b border-slate-800">
+      <header className="border-b border-[#262626] bg-[#0a0a0a]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
 
           {/* Logo */}
-          <div>
-            <h1 className="text-xl font-bold">
-              StudyAI
-            </h1>
+          <div className="flex items-center gap-3">
 
-            <p className="text-sm text-slate-400">
-              Your AI-powered study companion
-            </p>
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#450a0a] text-sm font-bold text-[#fca5a5]">
+              S
+            </div>
+
+            <div>
+              <h1 className="text-xl font-semibold tracking-tight">
+                StudyAI
+              </h1>
+
+              <p className="text-sm text-[#737373]">
+                Your AI-powered study companion
+              </p>
+            </div>
+
           </div>
 
           {/* Upload button */}
-          <button className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-200">
+          <label className="cursor-pointer rounded-lg bg-[#f5f5f5] px-4 py-2 text-sm font-medium text-[#0a0a0a] transition hover:bg-[#d4d4d4]">
             + New Document
-          </button>
+
+            <input
+              type="file"
+              accept=".pdf,.docx,.txt"
+              className="hidden"
+            />
+          </label>
 
         </div>
       </header>
@@ -72,57 +86,61 @@ function App() {
       <div className="mx-auto flex max-w-7xl">
 
         {/* Sidebar */}
-        <aside className="hidden min-h-[calc(100vh-73px)] w-64 border-r border-slate-800 p-6 md:block">
+        <aside className="hidden min-h-[calc(100vh-73px)] w-64 border-r border-[#262626] p-6 md:block">
 
-          <h2 className="mb-4 text-sm font-semibold text-slate-400">
+          <h2 className="mb-4 text-xs font-semibold tracking-wider text-[#737373]">
             YOUR DOCUMENTS
           </h2>
 
           {/* Document list */}
-          <div className="space-y-2">
+          <div className="space-y-1">
 
-            <button className="w-full rounded-lg bg-slate-800 p-3 text-left text-sm">
-              📄 Discrete Mathematics
+            {/* Active document */}
+            <button className="w-full rounded-lg border border-[#3f1717] bg-[#1c1111] p-3 text-left text-sm text-[#f5f5f5] transition hover:bg-[#241515]">
+              <span className="mr-2">📄</span>
+              Discrete Mathematics
             </button>
 
-            <button className="w-full rounded-lg p-3 text-left text-sm text-slate-400 hover:bg-slate-900">
-              📄 Java Notes
+            <button className="w-full rounded-lg p-3 text-left text-sm text-[#a3a3a3] transition hover:bg-[#171717] hover:text-[#f5f5f5]">
+              <span className="mr-2">📄</span>
+              Java Notes
             </button>
 
-            <button className="w-full rounded-lg p-3 text-left text-sm text-slate-400 hover:bg-slate-900">
-              📄 Computer Architecture
+            <button className="w-full rounded-lg p-3 text-left text-sm text-[#a3a3a3] transition hover:bg-[#171717] hover:text-[#f5f5f5]">
+              <span className="mr-2">📄</span>
+              Computer Architecture
             </button>
 
           </div>
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 px-6 py-12">
+        <main className="flex-1 px-6 py-16">
 
           <div className="mx-auto max-w-4xl">
 
             {/* Welcome */}
             <div className="mb-10">
 
-              <p className="mb-2 text-sm font-medium text-blue-400">
+              <p className="mb-3 text-xs font-semibold tracking-[0.2em] text-[#a33a3a]">
                 STUDYAI
               </p>
 
-              <h2 className="text-4xl font-bold tracking-tight">
+              <h2 className="text-4xl font-semibold tracking-tight text-[#f5f5f5]">
                 What are you studying today?
               </h2>
 
-              <p className="mt-3 text-slate-400">
+              <p className="mt-3 text-[#737373]">
                 Ask questions about your uploaded study materials.
               </p>
 
             </div>
 
             {/* Question box */}
-            <div className="rounded-2xl border border-slate-700 bg-slate-900 p-4 shadow-xl">
+            <div className="rounded-2xl border border-[#2a2a2a] bg-[#141414] p-4 shadow-2xl shadow-black/20 transition focus-within:border-[#5c2020]">
 
               <textarea
-                className="min-h-32 w-full resize-none bg-transparent p-2 text-lg outline-none placeholder:text-slate-600"
+                className="min-h-32 w-full resize-none bg-transparent p-2 text-lg text-[#f5f5f5] outline-none placeholder:text-[#525252]"
                 placeholder="Ask a question..."
                 value={question}
 
@@ -138,12 +156,17 @@ function App() {
                 }}
               />
 
-              <div className="flex justify-end border-t border-slate-800 pt-3">
+              <div className="flex justify-between border-t border-[#262626] pt-3">
 
+                <p className="self-center text-xs text-[#525252]">
+                  Press Enter to ask
+                </p>
+
+                {/* Ask button */}
                 <button
                   onClick={askQuestion}
                   disabled={loading}
-                  className="rounded-lg bg-blue-600 px-5 py-2 font-medium hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="rounded-lg bg-[#7f1d1d] px-5 py-2 text-sm font-medium text-[#fff5f5] transition hover:bg-[#991b1b] disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   {loading ? "Thinking..." : "Ask AI"}
                 </button>
@@ -153,14 +176,29 @@ function App() {
 
             {/* AI answer */}
             {answer && (
-              <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900 p-6">
+              <div className="mt-8 rounded-2xl border border-[#3a2424] bg-[#141414] p-6">
 
-                <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-400">
-                  AI Answer
-                </h3>
+                {/* AI header */}
+                <div className="mb-5 flex items-center gap-3">
+
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#450a0a] text-xs font-bold text-[#fca5a5]">
+                    AI
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm font-medium text-[#f5f5f5]">
+                      AI Answer
+                    </h3>
+
+                    <p className="text-xs text-[#737373]">
+                      StudyAI
+                    </p>
+                  </div>
+
+                </div>
 
                 {/* Render Markdown */}
-                <div className="prose prose-invert max-w-none">
+                <div className="prose prose-invert max-w-none text-[#d4d4d4]">
                   <ReactMarkdown>
                     {answer}
                   </ReactMarkdown>
@@ -170,43 +208,51 @@ function App() {
             )}
 
             {/* Recent documents */}
-            <section className="mt-12">
+            <section className="mt-16">
 
-              <h3 className="mb-4 text-xl font-semibold">
-                Recent Documents
-              </h3>
+              <div className="mb-5">
+
+                <h3 className="text-xl font-semibold text-[#f5f5f5]">
+                  Recent Documents
+                </h3>
+
+                <p className="mt-1 text-sm text-[#737373]">
+                  Your uploaded study materials
+                </p>
+
+              </div>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
                 {/* Document card */}
-                <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+                <div className="cursor-pointer rounded-xl border border-[#262626] bg-[#141414] p-5 transition hover:border-[#3a3a3a] hover:bg-[#1a1a1a]">
 
-                  <div className="mb-4 text-2xl">
+                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-lg bg-[#1f1515] text-lg">
                     📄
                   </div>
 
-                  <h4 className="font-medium">
+                  <h4 className="font-medium text-[#f5f5f5]">
                     Discrete Mathematics
                   </h4>
 
-                  <p className="mt-1 text-sm text-slate-500">
+                  <p className="mt-2 text-sm text-[#737373]">
                     12 chunks
                   </p>
 
                 </div>
 
                 {/* Document card */}
-                <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+                <div className="cursor-pointer rounded-xl border border-[#262626] bg-[#141414] p-5 transition hover:border-[#3a3a3a] hover:bg-[#1a1a1a]">
 
-                  <div className="mb-4 text-2xl">
+                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-lg bg-[#1f1515] text-lg">
                     📄
                   </div>
 
-                  <h4 className="font-medium">
+                  <h4 className="font-medium text-[#f5f5f5]">
                     Java Notes
                   </h4>
 
-                  <p className="mt-1 text-sm text-slate-500">
+                  <p className="mt-2 text-sm text-[#737373]">
                     8 chunks
                   </p>
 
